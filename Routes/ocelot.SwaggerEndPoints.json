@@ -1,0 +1,24 @@
+﻿{
+  "SwaggerEndPoints": [
+    {
+      "Key": "User",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "https://localhost:44331/swagger/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Auth",
+      "Config": [
+        {
+          "Name": "Auth API",
+          "Version": "v1",
+          "Url": "https://localhost:44320/swagger/swagger.json"
+        }
+      ]
+    }
+  ]
+}
