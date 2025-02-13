@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44320
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/auth",
