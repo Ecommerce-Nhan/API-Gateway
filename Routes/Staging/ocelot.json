@@ -23,7 +23,7 @@
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/auth/token",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -93,14 +93,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5012
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/user",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -219,7 +219,7 @@
       ],
       "StringSplitOption": "None",
       "NumberStyle": "Any",
-      "CurrentCulture": "vi-VN"
+      "CurrentCulture": "en-US"
     },
     "SecurityOptions": {
       "IPAllowedList": [],
