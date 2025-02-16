@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using System.Text;
 
 namespace APIGateway.Extensions;
@@ -55,6 +56,21 @@ public static class ServiceCollections
             };
         });
         services.AddAuthorization();
+
+        return services;
+    }
+
+    public static IServiceCollection AddRedis(this IServiceCollection services)
+    {
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = "localhost";
+            options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
+            {
+                AbortOnConnectFail = true,
+                EndPoints = { options.Configuration }
+            };
+        });
 
         return services;
     }

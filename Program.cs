@@ -1,10 +1,16 @@
 using APIGateway.Extensions;
+using APIGateway.Middleware;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Ocelot.Authorization;
 using Ocelot.Middleware;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddOcelotConfiguration();
 builder.Services.AddJWT(builder.Configuration);
+builder.Services.AddRedis();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,7 +27,11 @@ if (app.Environment.IsProduction())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+var configuration = new OcelotPipelineConfiguration
+{
+    AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
+};
 app.UseAuthentication();
 app.UseAuthorization();
-await app.UseOcelot();
+await app.UseOcelot(configuration);
 await app.RunAsync();
