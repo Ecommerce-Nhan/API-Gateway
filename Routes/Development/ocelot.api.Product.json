@@ -12,14 +12,6 @@
       "UpstreamPathTemplate": "/products/v{version}/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "Product",
-      "AuthenticationOptions": {
-        "AllowedScopes": [],
-        "AuthenticationProviderKey": "Bearer",
-        "AuthenticationProviderKeys": []
-      },
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin"
-      },
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,

@@ -1,41 +1,49 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Azure.Core;
+using Microsoft.Extensions.Caching.Distributed;
 using Ocelot.Authorization;
+using Ocelot.Configuration;
 using Ocelot.Middleware;
 using System.Security.Claims;
 using System.Text.Json;
 
 namespace APIGateway.Middleware;
 
-public class OcelotAuthorizationMiddleware
+public class OcelotCustomAuthMiddleware
 {
-    private static readonly Dictionary<string, string> MethodToPermission = new()
-    {
-        { "GET", "View" },
-        { "POST", "Create" },
-        { "PUT", "Edit" },
-        { "DELETE", "Delete" }
-    };
-
     public static async Task Handle(HttpContext context, Func<Task> next)
     {
-        var cache = context.RequestServices.GetRequiredService<IDistributedCache>();
-        var user = context.User;
+        if (IsOptionsHttpMethod(context) || IsAuthMethod(context))
+        {
+            await next.Invoke();
+            return;
+        }
 
-        if (user?.Identity == null || !user.Identity.IsAuthenticated)
+        var downstreamRoute = context.Items.DownstreamRoute();
+        ClaimsPrincipal claimsPrincipal = context.User;
+
+        if (claimsPrincipal.Identity == null)
         {
             context.Items.SetError(new UnauthenticatedError("Unauthorized"));
             return;
         }
 
-        var userRoles = user.Claims
-            .Where(c => c.Type == ClaimTypes.Role)
-            .Select(c => c.Value)
-            .ToList();
+
+        if (!await Authorize(context, downstreamRoute))
+        {
+            return;
+        }
+    }
+    private static async Task<bool> Authorize(HttpContext context, DownstreamRoute downstreamRoute)
+    {
+        var cache = context.RequestServices.GetRequiredService<IDistributedCache>();
+        var claimsPrincipal = context.User;
+        var userRoles = claimsPrincipal.Claims.Where(c => c.Type == ClaimTypes.Role)
+                                              .Select(c => c.Value)
+                                              .ToList();
 
         if (!userRoles.Any())
         {
-            await next.Invoke();
-            return;
+            return false;
         }
 
         var method = context.Request.Method.ToUpper();
@@ -60,17 +68,29 @@ public class OcelotAuthorizationMiddleware
                     var permissions = JsonSerializer.Deserialize<HashSet<string>>(permissionsJson);
                     if (permissions != null && permissions.Contains(requiredPermission))
                     {
-                        await next.Invoke();
-                        return;
+                        return true;
                     }
                 }
             }
         }
 
-        var downstreamRoute = context.Items.DownstreamRoute();
-        context.Items.SetError(new UnauthorizedError(
-                        $"{context.User.Identity?.Name} " +
-                        $"unable to access " +
-                        $"{downstreamRoute.UpstreamPathTemplate.OriginalValue}"));
+        context.Items.SetError(new UnauthorizedError($"{context.User.Identity?.Name} unable to access" +
+                                                     $" {downstreamRoute.UpstreamPathTemplate.OriginalValue}"));
+        return false;
+    }
+    private static readonly Dictionary<string, string> MethodToPermission = new()
+    {
+        { "GET", "View" },
+        { "POST", "Create" },
+        { "PUT", "Edit" },
+        { "DELETE", "Delete" }
+    };
+    private static bool IsOptionsHttpMethod(HttpContext httpContext)
+    {
+        return httpContext.Request.Method.ToUpper() == "OPTIONS";
+    }
+    private static bool IsAuthMethod(HttpContext httpContext)
+    {
+        return httpContext.Request.Path.Value?.ToUpper() == "/AUTH";
     }
 }

@@ -83,7 +83,7 @@
       "AddQueriesToRequest": {},
       "AuthenticationOptions": {
         "AllowedScopes": [],
-        "AuthenticationProviderKey": "Bearer",
+        "AuthenticationProviderKey": null,
         "AuthenticationProviderKeys": []
       },
       "ChangeDownstreamPathTemplate": {},
@@ -136,9 +136,7 @@
         "Limit": 1
       },
       "RequestIdKey": null,
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin"
-      },
+      "RouteClaimsRequirement": {},
       "RouteIsCaseSensitive": false,
       "SecurityOptions": {
         "IPAllowedList": [],
@@ -165,7 +163,7 @@
       "AddQueriesToRequest": {},
       "AuthenticationOptions": {
         "AllowedScopes": [],
-        "AuthenticationProviderKey": "Bearer",
+        "AuthenticationProviderKey": null,
         "AuthenticationProviderKeys": []
       },
       "ChangeDownstreamPathTemplate": {},
@@ -218,9 +216,7 @@
         "Limit": 1
       },
       "RequestIdKey": null,
-      "RouteClaimsRequirement": {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Admin"
-      },
+      "RouteClaimsRequirement": {},
       "RouteIsCaseSensitive": false,
       "SecurityOptions": {
         "IPAllowedList": [],
