@@ -1,10 +1,6 @@
 using APIGateway.Extensions;
 using APIGateway.Middleware;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
-using Ocelot.Authorization;
 using Ocelot.Middleware;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
