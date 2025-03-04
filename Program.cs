@@ -25,7 +25,7 @@ if (app.Environment.IsProduction())
 }
 var configuration = new OcelotPipelineConfiguration
 {
-    AuthorizationMiddleware = OcelotCustomAuthMiddleware.Handle
+    AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
 };
 app.UseAuthentication();
 app.UseAuthorization();

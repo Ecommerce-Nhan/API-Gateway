@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace APIGateway.Middleware;
 
-public class OcelotCustomAuthMiddleware
+public class OcelotAuthorizationMiddleware
 {
     public static async Task Handle(HttpContext context, Func<Task> next)
     {
