@@ -32,6 +32,7 @@ public class OcelotAuthorizationMiddleware
         {
             return;
         }
+        await next.Invoke();
     }
     private static async Task<bool> Authorize(HttpContext context, DownstreamRoute downstreamRoute)
     {
