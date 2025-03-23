@@ -29,6 +29,23 @@ public static class ServiceCollections
         return builder;
     }
 
+    public static IServiceCollection AddCorsConfiguration(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend",
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+        });
+
+        return services;
+    }
+
     public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
     {
         var secretKey = configuration["JWT:Secret"];

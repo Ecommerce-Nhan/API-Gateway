@@ -4,7 +4,7 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddOcelotConfiguration();
+builder.Services.AddCorsConfiguration();
 builder.Services.AddJWT(builder.Configuration);
 builder.Services.AddRedis();
 
@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseCors("AllowFrontend");
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
@@ -25,7 +26,7 @@ if (app.Environment.IsProduction())
 }
 var configuration = new OcelotPipelineConfiguration
 {
-    AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
+    //AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
 };
 app.UseAuthentication();
 app.UseAuthorization();
