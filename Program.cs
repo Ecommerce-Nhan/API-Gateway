@@ -4,6 +4,7 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddOcelotConfiguration();
 builder.Services.AddCorsConfiguration();
 builder.Services.AddJWT(builder.Configuration);
 builder.Services.AddRedis();
@@ -26,7 +27,7 @@ if (app.Environment.IsProduction())
 }
 var configuration = new OcelotPipelineConfiguration
 {
-    //AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
+    AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
 };
 app.UseAuthentication();
 app.UseAuthorization();

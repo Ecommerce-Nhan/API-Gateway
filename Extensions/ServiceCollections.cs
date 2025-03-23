@@ -81,7 +81,7 @@ public static class ServiceCollections
     {
         services.AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = "localhost";
+            options.Configuration = "RedisCache";
             options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
             {
                 AbortOnConnectFail = true,
