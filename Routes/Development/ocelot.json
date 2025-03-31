@@ -154,7 +154,7 @@
         "Put",
         "Delete"
       ],
-      "UpstreamPathTemplate": "/products/v{version}/{everything}",
+      "UpstreamPathTemplate": "/api/v{version}/product/{everything}",
       "UpstreamHeaderTemplates": {}
     },
     {
@@ -179,8 +179,8 @@
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
-      "DownstreamPathTemplate": "/api/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v{version}/user/{everything}",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -234,7 +234,7 @@
         "Put",
         "Delete"
       ],
-      "UpstreamPathTemplate": "/user",
+      "UpstreamPathTemplate": "/api/v{version}/user/{everything}",
       "UpstreamHeaderTemplates": {}
     }
   ],

@@ -9,7 +9,7 @@
           "Port": 8084
         }
       ],
-      "UpstreamPathTemplate": "/product/v{version}/{everything}",
+      "UpstreamPathTemplate": "/api/v{version}/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "Product",
       "RateLimitOptions": {

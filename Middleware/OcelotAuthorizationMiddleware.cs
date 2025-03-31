@@ -10,6 +10,12 @@ namespace APIGateway.Middleware;
 
 public class OcelotAuthorizationMiddleware
 {
+    private static readonly ILogger<OcelotAuthorizationMiddleware> _logger;
+    static OcelotAuthorizationMiddleware()
+    {
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        _logger = loggerFactory.CreateLogger<OcelotAuthorizationMiddleware>();
+    }
     public static async Task Handle(HttpContext context, Func<Task> next)
     {
         if (IsOptionsHttpMethod(context) || IsAuthMethod(context))
@@ -54,6 +60,8 @@ public class OcelotAuthorizationMiddleware
         resourceName = string.IsNullOrEmpty(resourceName)
                        ? "Unknown"
                        : char.ToUpper(resourceName[0]) + resourceName.Substring(1);
+        _logger.LogInformation("Resource Access Attempt: {ResourceName}, Method: {Method}, Roles: {Roles}",
+           resourceName, method, string.Join(", ", userRoles));
 
         if (MethodToPermission.TryGetValue(method, out var permissionSuffix))
         {

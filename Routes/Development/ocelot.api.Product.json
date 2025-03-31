@@ -9,7 +9,7 @@
           "Port": 5165
         }
       ],
-      "UpstreamPathTemplate": "/products/v{version}/{everything}",
+      "UpstreamPathTemplate": "/api/v{version}/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "Product",
       "RateLimitOptions": {

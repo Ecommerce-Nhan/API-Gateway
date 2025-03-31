@@ -10,8 +10,8 @@
         }
       ],
       "UpstreamPathTemplate": "/auth",
-      "UpstreamHttpMethod": [ "Post" ],
-      "SwaggerKey": "Auth"
+      "UpstreamHttpMethod": [ "Post" ]
+      //"SwaggerKey": "Auth"
     }
   ]
 }

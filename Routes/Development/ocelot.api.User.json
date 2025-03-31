@@ -1,17 +1,16 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v{version}/user/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5011
         }
       ],
-      "UpstreamPathTemplate": "/user",
+      "UpstreamPathTemplate": "/api/v{version}/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "User",
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
