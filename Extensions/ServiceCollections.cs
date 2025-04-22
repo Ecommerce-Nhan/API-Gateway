@@ -36,7 +36,7 @@ public static class ServiceCollections
             options.AddPolicy("AllowFrontend",
                 policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
+                    policy.WithOrigins("https://localhost:7139")
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials();
