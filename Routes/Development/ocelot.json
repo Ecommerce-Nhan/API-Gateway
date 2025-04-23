@@ -22,7 +22,7 @@
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
-      "DownstreamPathTemplate": "/auth/token",
+      "DownstreamPathTemplate": "/api/identity/{everything}",
       "DownstreamScheme": "https",
       "FileCacheOptions": {
         "TtlSeconds": null,
@@ -74,7 +74,7 @@
       "UpstreamHttpMethod": [
         "Post"
       ],
-      "UpstreamPathTemplate": "/auth",
+      "UpstreamPathTemplate": "/api/identity/{everything}",
       "UpstreamHeaderTemplates": {}
     },
     {
