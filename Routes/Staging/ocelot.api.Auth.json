@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/auth/token",
+      "DownstreamPathTemplate": "/api/identity/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,8 +9,8 @@
           "Port": 8081
         }
       ],
-      "UpstreamPathTemplate": "/auth",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamPathTemplate": "/api/identity/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
       //"SwaggerKey": "User"
     }
   ]

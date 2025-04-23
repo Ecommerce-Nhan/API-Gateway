@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/auth/token",
+      "DownstreamPathTemplate": "/api/identity/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/auth",
+      "UpstreamPathTemplate": "/api/identity/{everything}",
       "UpstreamHttpMethod": [ "Post" ]
       //"SwaggerKey": "Auth"
     }

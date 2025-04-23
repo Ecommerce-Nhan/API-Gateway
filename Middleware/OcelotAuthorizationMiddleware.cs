@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Caching.Distributed;
 using Ocelot.Authorization;
 using Ocelot.Configuration;
@@ -18,14 +19,14 @@ public class OcelotAuthorizationMiddleware
     }
     public static async Task Handle(HttpContext context, Func<Task> next)
     {
-        if (IsOptionsHttpMethod(context) || IsAuthMethod(context))
+        var downstreamRoute = context.Items.DownstreamRoute();
+        ClaimsPrincipal claimsPrincipal = context.User;
+
+        if (IsOptionsHttpMethod(context) || IsAuthMethod(context, downstreamRoute))
         {
             await next.Invoke();
             return;
         }
-
-        var downstreamRoute = context.Items.DownstreamRoute();
-        ClaimsPrincipal claimsPrincipal = context.User;
 
         if (claimsPrincipal.Identity == null)
         {
@@ -36,6 +37,7 @@ public class OcelotAuthorizationMiddleware
 
         if (!await Authorize(context, downstreamRoute))
         {
+            context.Items.SetError(new UnauthorizedError("Forbidden"));
             return;
         }
         await next.Invoke();
@@ -98,8 +100,8 @@ public class OcelotAuthorizationMiddleware
     {
         return httpContext.Request.Method.ToUpper() == "OPTIONS";
     }
-    private static bool IsAuthMethod(HttpContext httpContext)
+    private static bool IsAuthMethod(HttpContext httpContext, DownstreamRoute downstreamRoute)
     {
-        return httpContext.Request.Path.Value?.ToUpper() == "/AUTH";
+        return httpContext.Request.Path.Value?.ToUpper() == "/API/IDENTITY/TOKEN";
     }
 }
