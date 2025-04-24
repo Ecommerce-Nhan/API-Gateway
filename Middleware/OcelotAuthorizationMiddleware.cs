@@ -58,7 +58,7 @@ public class OcelotAuthorizationMiddleware
         var method = context.Request.Method.ToUpper();
         var path = context.Request.Path.Value?.Trim('/') ?? string.Empty;
         var pathSegments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-        var resourceName = pathSegments.FirstOrDefault();
+        var resourceName = pathSegments[2];
         resourceName = string.IsNullOrEmpty(resourceName)
                        ? "Unknown"
                        : char.ToUpper(resourceName[0]) + resourceName.Substring(1);
@@ -68,6 +68,7 @@ public class OcelotAuthorizationMiddleware
         if (MethodToPermission.TryGetValue(method, out var permissionSuffix))
         {
             var requiredPermission = $"Permissions.{resourceName}.{permissionSuffix}";
+            _logger.LogInformation(requiredPermission);
 
             foreach (var role in userRoles)
             {
