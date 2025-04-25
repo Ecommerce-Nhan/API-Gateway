@@ -11,13 +11,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("AllowFrontend");
+
 var ocelotConfiguration = new OcelotPipelineConfiguration
 {
     AuthenticationMiddleware = OcelotAuthenticationMiddleware.Handle
 };
 await app.UseOcelot(ocelotConfiguration);
 
-app.UseCors("AllowFrontend");
 
 if (!app.Environment.IsProduction())
 {
