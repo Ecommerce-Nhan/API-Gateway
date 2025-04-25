@@ -11,7 +11,6 @@
       ],
       "UpstreamPathTemplate": "/api/identity/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-      //"SwaggerKey": "User"
     }
   ]
 }
