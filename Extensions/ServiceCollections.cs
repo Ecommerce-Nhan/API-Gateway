@@ -2,7 +2,6 @@
 using Microsoft.IdentityModel.Tokens;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 using System.Text;
 
 namespace APIGateway.Extensions;
@@ -46,49 +45,4 @@ public static class ServiceCollections
         return services;
     }
 
-    public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
-    {
-        var secretKey = configuration["JWT:Secret"];
-        if (string.IsNullOrEmpty(secretKey))
-        {
-            throw new InvalidOperationException("JWT Secret Key is missing in configuration.");
-        }
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer("Bearer", o =>
-        {
-            o.RequireHttpsMetadata = false;
-            o.SaveToken = true;
-            o.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero,
-
-                //ValidIssuer = "https://localhost:5001/",
-                //ValidAudience = "388D45FA-B36B-4988-BA59-B187D329C207",
-                IssuerSigningKey = key
-            };
-        });
-        services.AddAuthorization();
-
-        return services;
-    }
-
-    public static IServiceCollection AddRedis(this IServiceCollection services)
-    {
-        services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = "RedisCache";
-            options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
-            {
-                AbortOnConnectFail = true,
-                EndPoints = { options.Configuration }
-            };
-        });
-
-        return services;
-    }
 }
