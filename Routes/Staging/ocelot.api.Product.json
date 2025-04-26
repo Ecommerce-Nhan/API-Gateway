@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/v{version}/product/{everything}",
+      "DownstreamPathTemplate": "/api/v1/product/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,16 +9,22 @@
           "Port": 8084
         }
       ],
-      "UpstreamPathTemplate": "/api/v{version}/product/{everything}",
+      "UpstreamPathTemplate": "/api/v1/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "Product",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "15s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "SwaggerKey": "Product"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/variant/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ProductApi",
+          "Port": 8084
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/variant/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Product"
     }
   ]
 }

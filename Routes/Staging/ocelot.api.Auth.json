@@ -10,7 +10,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/identity/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Auth"
     }
   ]
 }

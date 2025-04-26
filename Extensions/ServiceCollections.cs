@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using MMLib.SwaggerForOcelot.DependencyInjection;
+﻿using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
-using System.Text;
 
 namespace APIGateway.Extensions;
 

@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/v{version}/product/{everything}",
+      "DownstreamPathTemplate": "/api/v1/product/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 5165
         }
       ],
-      "UpstreamPathTemplate": "/api/v{version}/product/{everything}",
+      "UpstreamPathTemplate": "/api/v1/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "Product",
       "RateLimitOptions": {
@@ -19,6 +19,19 @@
         "PeriodTimespan": 1,
         "Limit": 1
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/variant/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5165
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/variant/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Product"
     }
   ]
 }

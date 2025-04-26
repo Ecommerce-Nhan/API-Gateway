@@ -17,14 +17,12 @@ var ocelotConfiguration = new OcelotPipelineConfiguration
 {
     AuthenticationMiddleware = OcelotAuthenticationMiddleware.Handle
 };
-await app.UseOcelot(ocelotConfiguration);
-
 
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerForOcelotUI(options => { options.PathToSwaggerGenerator = "/swagger/docs"; });
 }
-
+await app.UseOcelot(ocelotConfiguration);
 
 await app.RunAsync();
