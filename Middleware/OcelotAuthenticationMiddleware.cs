@@ -20,6 +20,8 @@ public class OcelotAuthenticationMiddleware
             return;
         }
 
+        // Lamda authorize or introspect directly
+
         await next.Invoke();
     }
 
