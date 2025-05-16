@@ -165,3 +165,7 @@ obj
 
 Logs
 *.csproj.user
+
+/ocelot.json
+Routes/Development/ocelot.json
+Routes/Staging/ocelot.json
