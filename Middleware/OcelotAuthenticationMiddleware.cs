@@ -20,7 +20,7 @@ public class OcelotAuthenticationMiddleware
             return;
         }
 
-        // Lamda authorize or introspect directly
+        var token = context.Request.Headers.Authorization.ToString();
 
         await next.Invoke();
     }
