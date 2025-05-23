@@ -9,7 +9,7 @@
           "Port": 5010
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/user/{everything}",
+      "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "User"
     }
