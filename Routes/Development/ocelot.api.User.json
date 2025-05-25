@@ -11,7 +11,9 @@
       ],
       "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "User"
+      "SwaggerKey": "User",
+      "AuthenticationProviderKeys": [ "RefToken" ],
+      "AllowedScopes": []
     }
   ]
 }

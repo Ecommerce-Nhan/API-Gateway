@@ -27,7 +27,7 @@ public class OcelotAuthenticationMiddleware
 
     private static bool IsOptionsHttpMethod(HttpContext httpContext)
     {
-        return httpContext.Request.Method.ToUpper() == "OPTIONS";
+        return httpContext.Request.Method.Equals("OPTIONS", StringComparison.CurrentCultureIgnoreCase);
     }
 
     private static bool IsAuthMethod(HttpContext httpContext, DownstreamRoute downstreamRoute)
