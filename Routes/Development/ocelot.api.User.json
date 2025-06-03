@@ -1,23 +1,19 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/v{version}/user/{everything}",
+      "DownstreamPathTemplate": "/api/v1/user/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5010
         }
       ],
-      "UpstreamPathTemplate": "/api/v{version}/user/{everything}",
+      "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "15s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "SwaggerKey": "User",
+      "AuthenticationProviderKeys": [ "RefToken" ],
+      "AllowedScopes": []
     }
   ]
 }

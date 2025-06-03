@@ -1,35 +1,39 @@
 using APIGateway.Extensions;
+using APIGateway.Handlers;
 using APIGateway.Middleware;
+using Microsoft.AspNetCore.Authentication;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddOcelotConfiguration();
 builder.Services.AddCorsConfiguration();
-builder.Services.AddJWT(builder.Configuration);
-builder.Services.AddRedis();
-
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication("RefToken")
+    .AddScheme<AuthenticationSchemeOptions, ReferenceTokenAuthenticationHandler>("RefToken", options => { });
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
-app.UseCors("AllowFrontend");
+
+var ocelotConfiguration = new OcelotPipelineConfiguration
+{
+    AuthenticationMiddleware = OcelotAuthenticationMiddleware.Handle
+};
+
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerForOcelotUI(options => { options.PathToSwaggerGenerator = "/swagger/docs"; });
+    app.UseCors(policy => policy.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader());
 }
-if (app.Environment.IsProduction())
+else
 {
-    app.UseHttpsRedirection();
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.UseCors("AllowFrontend");
 }
-var configuration = new OcelotPipelineConfiguration
-{
-    AuthorizationMiddleware = OcelotAuthorizationMiddleware.Handle
-};
 app.UseAuthentication();
-app.UseAuthorization();
-await app.UseOcelot(configuration);
+await app.UseOcelot(ocelotConfiguration);
+
 await app.RunAsync();

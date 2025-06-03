@@ -19,6 +19,16 @@
           "Url": "http://ProductApi:8084/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "User",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "http://localhost:8080/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }
