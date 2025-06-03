@@ -8,9 +8,17 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ENV ASPNETCORE_ENVIRONMENT=Development
 ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 ARG BUILD_CONFIGURATION=Release
+ARG GITHUB_USERNAME
+ARG GITHUB_TOKEN
 
 WORKDIR /src
 COPY . .
+
+RUN dotnet nuget add source \
+    --username $GITHUB_USERNAME \
+    --password $GITHUB_TOKEN \
+    --store-password-in-clear-text \
+    --name github "https://nuget.pkg.github.com/nhanne/index.json"
 
 RUN dotnet restore "./APIGateway.csproj"
 RUN dotnet build "./APIGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
