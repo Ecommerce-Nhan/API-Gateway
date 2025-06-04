@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddOcelotConfiguration();
 builder.Services.AddCorsConfiguration();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication("RefToken")
     .AddScheme<AuthenticationSchemeOptions, ReferenceTokenAuthenticationHandler>("RefToken", options => { });
