@@ -1,0 +1,30 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/product/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.local.ecommerce",
+          "Port": 8084
+        }
+      ],
+      "UpstreamPathTemplate": "/api/product/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Product"
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/variant/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.local.ecommerce",
+          "Port": 8084
+        }
+      ],
+      "UpstreamPathTemplate": "/api/variant/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Product"
+    }
+  ]
+}

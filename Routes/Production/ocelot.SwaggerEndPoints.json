@@ -1,0 +1,34 @@
+﻿{
+  "SwaggerEndPoints": [
+    {
+      "Key": "Auth",
+      "Config": [
+        {
+          "Name": "Auth API",
+          "Version": "v1",
+          "Url": "http://auth.local.ecommerce:8081/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Product",
+      "Config": [
+        {
+          "Name": "Product API",
+          "Version": "v1",
+          "Url": "http://product.local.ecommerce:8084/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "User",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "http://user.local.ecommerce:8082/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
