@@ -2,7 +2,7 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/v1/product/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -19,19 +19,6 @@
         "PeriodTimespan": 1,
         "Limit": 1
       }
-    },
-    {
-      "DownstreamPathTemplate": "/api/variant/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5165
-        }
-      ],
-      "UpstreamPathTemplate": "/api/v1/variant/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "Product"
     }
   ]
 }
