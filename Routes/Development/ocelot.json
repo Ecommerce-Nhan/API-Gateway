@@ -100,7 +100,7 @@
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/v1/product/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -297,7 +297,7 @@
       ],
       "StringSplitOption": "None",
       "NumberStyle": "Any",
-      "CurrentCulture": "en-US"
+      "CurrentCulture": "vi-VN"
     },
     "SecurityOptions": {
       "IPAllowedList": [],
