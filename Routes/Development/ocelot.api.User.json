@@ -2,17 +2,16 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/v1/user/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 8082
         }
       ],
       "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "User",
-      "AuthenticationProviderKeys": [ "RefToken" ],
       "AllowedScopes": []
     }
   ]

@@ -16,14 +16,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 8081
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/identity/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -93,14 +93,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5165
+          "Port": 8084
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/v1/product/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
@@ -173,14 +173,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 8082
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/v1/user/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
