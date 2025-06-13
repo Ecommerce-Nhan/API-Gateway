@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
-using SharedLibrary.Response.Identity;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -91,4 +90,15 @@ public class ReferenceTokenAuthenticationHandler : AuthenticationHandler<Authent
     {
         return httpContext.Request.Method.Equals("OPTIONS", StringComparison.CurrentCultureIgnoreCase);
     }
+}
+
+public class TokenIntrospectionResponse
+{
+    public bool Active { get; set; }
+    public string Iss { get; set; } = string.Empty;
+    public string Sub { get; set; } = string.Empty;
+    public int Iat { get; set; }
+    public int Nbf { get; set; }
+    public int Exp { get; set; }
+    public string Payload_token { get; set; } = string.Empty;
 }

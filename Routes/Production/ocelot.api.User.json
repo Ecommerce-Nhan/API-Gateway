@@ -2,17 +2,16 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/v1/user/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "user.local.ecommerce",
+          "Host": "user",
           "Port": 8082
         }
       ],
       "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "User",
-      "AuthenticationProviderKeys": [ "RefToken" ]
+      "SwaggerKey": "User"
     }
   ]
 }
