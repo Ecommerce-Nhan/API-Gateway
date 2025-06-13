@@ -6,7 +6,7 @@
         {
           "Name": "Auth API",
           "Version": "v1",
-          "Url": "https://AuthApi:8081/swagger/v1/swagger.json"
+          "Url": "http://AuthApi:8081/swagger/v1/swagger.json"
         }
       ]
     },
@@ -26,7 +26,7 @@
         {
           "Name": "User API",
           "Version": "v1",
-          "Url": "https://UserApi:8082/swagger/v1/swagger.json"
+          "Url": "http://UserApi:8082/swagger/v1/swagger.json"
         }
       ]
     }
