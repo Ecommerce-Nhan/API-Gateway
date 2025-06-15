@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "user",
+          "Host": "user.local.ecommerce",
           "Port": 8082
         }
       ],

@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS base
 WORKDIR /app
 EXPOSE 8080
-ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
@@ -11,12 +11,6 @@ ARG GITHUB_TOKEN
 
 WORKDIR /src
 COPY . .
-
-RUN dotnet nuget add source \
-    --username $GITHUB_USERNAME \
-    --password $GITHUB_TOKEN \
-    --store-password-in-clear-text \
-    --name github "https://nuget.pkg.github.com/nhanne/index.json"
 
 RUN dotnet restore "./APIGateway.csproj"
 RUN dotnet build "./APIGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build --no-restore
