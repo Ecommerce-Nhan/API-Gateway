@@ -11,7 +11,8 @@
       ],
       "UpstreamPathTemplate": "/api/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "Product"
+      "SwaggerKey": "Product",
+      "AuthenticationProviderKeys": [ "ReferenceToken" ]
     }
   ]
 }

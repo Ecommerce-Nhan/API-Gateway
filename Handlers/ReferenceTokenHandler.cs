@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using APIGateway.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
@@ -7,12 +8,13 @@ using System.Text.Json.Serialization;
 
 namespace APIGateway.Handlers;
 
-public class ReferenceTokenAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+public class ReferenceTokenHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<ReferenceTokenHandler> _logger;
 
-    public ReferenceTokenAuthenticationHandler(
+    public ReferenceTokenHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
         UrlEncoder encoder,
@@ -22,21 +24,20 @@ public class ReferenceTokenAuthenticationHandler : AuthenticationHandler<Authent
     {
         _httpClient = httpClientFactory.CreateClient();
         _configuration = configuration;
+        _logger = logger.CreateLogger<ReferenceTokenHandler>();
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (IsOptionsHttpMethod(Request.HttpContext))
-        {
-
-        }
-
         if (!Request.Headers.ContainsKey("Authorization"))
             return AuthenticateResult.Fail("Missing Authorization Header");
 
         var authHeader = Request.Headers["Authorization"].ToString();
         if (!authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+        {
+            _logger.LogWarning("Invalid Authorization Header format. Expected 'Bearer'");
             return AuthenticateResult.Fail("Invalid Scheme");
+        }
 
         var token = authHeader.Substring("Bearer ".Length).Trim();
         var introspectionEndpoint = _configuration["OpenIddict:IntrospectionEndpoint"];
@@ -65,7 +66,6 @@ public class ReferenceTokenAuthenticationHandler : AuthenticationHandler<Authent
         if (!introspectionResult.Active)
         {
             return AuthenticateResult.Fail("Token is not active");
-
         }
 
         var claims = new List<Claim>
@@ -90,15 +90,4 @@ public class ReferenceTokenAuthenticationHandler : AuthenticationHandler<Authent
     {
         return httpContext.Request.Method.Equals("OPTIONS", StringComparison.CurrentCultureIgnoreCase);
     }
-}
-
-public class TokenIntrospectionResponse
-{
-    public bool Active { get; set; }
-    public string Iss { get; set; } = string.Empty;
-    public string Sub { get; set; } = string.Empty;
-    public int Iat { get; set; }
-    public int Nbf { get; set; }
-    public int Exp { get; set; }
-    public string Payload_token { get; set; } = string.Empty;
 }

@@ -1,6 +1,5 @@
 using APIGateway.Extensions;
 using APIGateway.Handlers;
-using APIGateway.Middleware;
 using Microsoft.AspNetCore.Authentication;
 using Ocelot.Middleware;
 
@@ -10,17 +9,12 @@ builder.AddOcelotConfiguration();
 builder.Services.AddCorsConfiguration();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication("RefToken")
-    .AddScheme<AuthenticationSchemeOptions, ReferenceTokenAuthenticationHandler>("RefToken", options => { });
-
+builder.Services.AddHealthChecks();
 builder.Services.AddHttpClient();
+builder.Services.AddAuthentication("ReferenceToken")
+                .AddScheme<AuthenticationSchemeOptions, ReferenceTokenHandler>("ReferenceToken", options => { });
 
 var app = builder.Build();
-
-var ocelotConfiguration = new OcelotPipelineConfiguration
-{
-    AuthenticationMiddleware = OcelotAuthenticationMiddleware.Handle
-};
 
 if (!app.Environment.IsProduction())
 {
@@ -34,7 +28,8 @@ else
 {
     app.UseCors("AllowFrontend");
 }
+app.UseHealthChecks("/health");
 app.UseAuthentication();
-await app.UseOcelot(ocelotConfiguration);
 
+await app.UseOcelot();
 await app.RunAsync();

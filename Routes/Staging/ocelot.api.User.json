@@ -12,7 +12,7 @@
       "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "User",
-      "AuthenticationProviderKeys": [ "RefToken" ]
+      "AuthenticationProviderKeys": [ "ReferenceToken" ]
     }
   ]
 }
