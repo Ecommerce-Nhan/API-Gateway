@@ -154,7 +154,7 @@
         "Put",
         "Delete"
       ],
-      "UpstreamPathTemplate": "/api/product/{everything}",
+      "UpstreamPathTemplate": "/api/v1/product/{everything}",
       "UpstreamHeaderTemplates": {}
     },
     {
@@ -234,7 +234,7 @@
         "Put",
         "Delete"
       ],
-      "UpstreamPathTemplate": "/api/user/{everything}",
+      "UpstreamPathTemplate": "/api/v1/user/{everything}",
       "UpstreamHeaderTemplates": {}
     }
   ],
