@@ -1,5 +1,4 @@
 using APIGateway.Extensions;
-using APIGateway.Handlers;
 using Microsoft.AspNetCore.Authentication;
 using Ocelot.Middleware;
 
@@ -11,8 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.AddHttpClient();
-builder.Services.AddAuthentication("ReferenceToken")
-                .AddScheme<AuthenticationSchemeOptions, ReferenceTokenHandler>("ReferenceToken", options => { });
 
 var app = builder.Build();
 
