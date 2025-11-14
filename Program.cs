@@ -17,9 +17,9 @@ if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerForOcelotUI(options => { options.PathToSwaggerGenerator = "/swagger/docs"; });
-    app.UseCors(policy => policy.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader());
+    //app.UseCors(policy => policy.AllowAnyOrigin()
+    //                            .AllowAnyMethod()
+    //                            .AllowAnyHeader());
 }
 else
 {
