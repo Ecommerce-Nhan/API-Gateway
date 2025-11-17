@@ -173,14 +173,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8082
+          "Port": 5010
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamHttpVersionPolicy": null,
       "DownstreamPathTemplate": "/api/v1/user/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "FileCacheOptions": {
         "TtlSeconds": null,
         "Region": null,
