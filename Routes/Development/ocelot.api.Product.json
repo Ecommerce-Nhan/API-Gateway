@@ -11,14 +11,7 @@
       ],
       "UpstreamPathTemplate": "/api/v1/product/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "Product",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "15s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "SwaggerKey": "Product"
     }
   ]
 }
